@@ -1,0 +1,74 @@
+# title postfix， every page will append this in tail
+title:            ET
+# description， apply every page not define
+description:      "火星猿人!"
+logo:             logo.png
+disqus_shortname: 猿人
+share:            true
+dropcap:	   true
+# Change url to your domain. Leave localhost server or blank when working locally.
+# or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
+# whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
+url:        	 ''
+
+# Owner/author information
+owner:
+  name:           lanceliu
+  avatar:         lanceliu.jpg
+  email:          liuyunfei86@gmail.com
+  # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
+  description:    未发之中
+  # Social networking links used in footer. Update and remove as you like.
+  twitter:        lanceliu
+  facebook:       lanceliu
+  github:         lanceliu
+  instagram:      lanceliu
+  # For Google Authorship https://plus.google.com/authorship
+
+# Analytics and webmaster tools stuff goes here
+google_analytics:   UA-46791108-1
+google_verify:
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:
+
+# Links to include in footer navigation
+# For external links add external: true
+links:
+  - title: 首页
+    url: /
+    external: false
+    icon: home
+  - title: 分类
+    url: /categories
+  - title: 关于
+    url: /about
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:    Asia/Beijing
+future:      true
+highlighter: pygments
+markdown:    kramdown
+paginate:    5
+paginate_path: "page:num"
+
+# https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink:   pretty
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+  coderay:
+    coderay_line_numbers:
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+gems:
+- jemoji
+
+wpm:  180
