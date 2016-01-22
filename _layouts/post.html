@@ -65,18 +65,14 @@
             </div>
         </article>
         <div class="cf"></div>
-{% if site.share %}{% include share.html %}{% endif %}
+        {% if site.share %}{% include share.html %}{% endif %}
         <div class="cf"></div>
 
             <div class="cf"></div>
             {% if page.comments == true %}
-            <section class="notepad-disqus row">
-                <h1 class="notepad-comments-header">Comments</h1>
                 {% include duoshuo_comments.html %}
-                </div>
-            </section>
             {% endif %}
-{% include signoff.html %}
+            {% include signoff.html %}
 
         <div class="cf"></div>
 
