@@ -29,14 +29,15 @@ tags: [lanceliu, 猿人]
                 </h3>
             </header>
             <section class="notepad-post-excerpt">
-                <p>{{ post.content | strip_html | truncatewords:40 }}</p>
-            </section>
-            
+                <!-- <p>{{ post.content | strip_html | truncatewords:40 }}</p> -->
+				<p>{{ post.excerpt }}</p>
+			</section>
+
                 <div class="notepad-index-post-tags">
                 {% for tag in post.categories %}<a href="{{ site.url }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-                    
+
                 </div>
-            
+
         </div>
     </article>
 	{% endfor %}
@@ -51,9 +52,9 @@ tags: [lanceliu, 猿人]
     <span class="newer-posts faded"><i class="fa fa-chevron-left"></i> 上一页</span>
     {% endif %}
 
-    
+
     <span class="page-number">第 {{ paginator.page }} 页 - 共 {{ paginator.total_pages }} 页</span>
-    	{% if paginator.next_page %} 
+    	{% if paginator.next_page %}
         <a class="older-posts" href="{{ site.url }}/page{{ paginator.next_page }}/">下一页 <i class="fa fa-chevron-right"></i></a>
     	{% else %}
     	<span class="older-posts faded">下一页 <i class="fa fa-chevron-right"></i></span>
@@ -85,13 +86,13 @@ tags: [lanceliu, 猿人]
             <section class="notepad-post-excerpt">
                 <p>{{ post.content | strip_html | truncatewords:100 }}</p>
             </section>
-            
+
                 <div class="notepad-index-post-tags">
                 {% for tag in post.categories %}<a href="{{ site.url }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-                    
+
                 </div>
-            
+
         </div>
     </article>
-	{% endfor %}  
+	{% endfor %}
 {% endif %}
