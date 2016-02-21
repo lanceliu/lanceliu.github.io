@@ -8,44 +8,51 @@ thread: 20160122221152555
 
 ---
 
-开源许可(open source license), 也就是我们经常说的*开源协议*(非专业叫法,下面都会以许可称呼),虽然有很多耳熟能详的英文缩写,但具体这个许可有哪些约束,
-能赋予哪些权利,一点也不清楚.
+开源许可(open source license), 也就是我们经常说的*开源协议*(非专业叫法,下面都会以许可称呼),虽然有很多耳熟能详的英文缩写,然而这些许可有哪些约束,能赋予我们哪些权利呢？
 
 下面我们就细数一下几种开源许可:
  BSD、Apache Licence、GPL V2 、GPL V3 、LGPL、MIT
- 
-> - BSD2：修改版本必须保持其原始版权声明。
-- BSD3：修改版本必须保持其原始版权声明。未经许可不得使用原作者或公司的名字做宣传。
-- Apache：修改版本必须保持其原始版权声明；修改过的文件要标明改动。
-- GPL：只要你用了任何该协议的库、甚至是一段代码，那么你的整个程序，不管以何种方式链接，都必须全部使用GPL协议、并遵循该协议开源。商业软件公司一般禁用GPL代码，但可以使用GPL的可执行文件和应用程序。
-- LGPL：就是GPL针对动态链接库放松要求了的版本，即允许非LGPL的代码动态链接到LGPL的模块。注意：不可以静态链接，否则你的代码也必须用LGPL协议开源。
-- MIT：修改版本必须保持其原始版权声明。
 
---- 
+ **基本概念**
+
+*Contributors 和 Recipients*
+ Contributors（贡献者） ——指的是对某个开源软件或项目提供了代码（包括最初的或者修改过）的人或实体（退队、公司、组织等）。
+ 按照贡献的先后可分为"创始人"（an initial Contributor）和"参与者"（subsequent Contributors）。
+
+ Recipients（获取者） ——指的是开源软件或项目的使用者。
+ 显然，subsequent Contributors也属于Recipients之列。
+
+ *Source Code 和 Object Code*
+ Source Code ——指的是由各种语言写成的源代码 。
+ Object Code ——指的是Source Code经过编译后，生成的类似“类库”一样的，提供了各种接口供他人使用的目标代码 （就如,DLL、JAR等）。
+
+ *Derivative Module 和 Separate Module*
+ Derivative Module（衍生模块） ——指的是，依托或包含“最初的”或者“从别人处获取的”开源代码而产生的代码，是对“源代码模块”的增强、改善和延续。
+ Separate Module（独立模块） ——指的是，参考或借助“源代码”开发出来的独立的，不包含、不依赖于原“源代码模块”的功能模块。
+
+
+---
 
 ## 一. BSD
 
-### Brief Introduction 
-BSD是Berkly Software Distribution的简写, 有三种版本
+### Brief Introduction
+BSD是Berkly Software Distribution.
 
-- original BSD license
-- FreeBSD license
-- original BSD license
+目前分为 [BSD 3-Clause](http://www.opensource.org/licenses/BSD-3-Clause) 和[BSD 2-Clause](https://opensource.org/licenses/BSD-2-Clause) 。顾名思义，3-Clause包含3个条款，2-Clause只有两个。
+
 
 ### Aim at
-BSD 代码鼓励代码共享
-   
-### CAN DO 
+BSD 鼓励代码共享的同时，要求尊重代码作者的著作权
+
+### CAN DO
 
 - 自由的使用
 - 修改源代码，
 - 修改后的代码作为开源或者专有软件再发布。
 
-### RESTRICT
+### RESTRICT(以下味BSD 3, BSD 2不包含第三条)
 - 再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。
 - 如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。
-
-### CAN NOT DO
 - 不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。
 
 ### Scenario
@@ -54,9 +61,9 @@ BSD由于允许使用者修改和重新发布代码，也允许使用或在BSD�
 
 ---
 
-## 二. Apache
+## 二. [Apache](http://www.opensource.org/licenses/Apache-2.0)
 
-### Brief Introduction 
+### Brief Introduction
 Apache Licence 2.0
 
 - Apache License, Version 2.0
@@ -68,7 +75,7 @@ Apache Licence是著名的非盈利开源组织Apache采用的协议。
 ### Aim at
 鼓励代码共享和尊重原作者的著作权
 
-### CAN DO 
+### CAN DO
 
 - 自由的使用
 - 修改源代码，
@@ -86,9 +93,9 @@ Apache Licence也是对商业应用友好的许可。使用者也可以在需要
 
 ---
 
-## 三. GPL
+## 三. [GPL](http://www.opensource.org/licenses/gpl-license)
 
-### Brief Introduction 
+### Brief Introduction
 GNU General Public License
 
 - GPL
@@ -102,9 +109,9 @@ GPL v2的相关规定：
 GPL v3的修订草案中，不仅要求用户公布修改的源代码，还要求公布相关硬件.
 
 ### Aim at
-代码的开源/免费使用和引用/修改/衍生代码的开源/免费使用;
-   
-### CAN DO 
+GPL的出发点是代码的开源/免费使用和引用/修改/衍生代码的开源/免费使用，但不允许修改后和衍生的代码做为闭源的商业软件发布和销售。
+
+### CAN DO
 
 - 自由的使用
 - 修改源代码，
@@ -112,8 +119,6 @@ GPL v3的修订草案中，不仅要求用户公布修改的源代码，还要�
 
 ### RESTRICT
 - 只要在一个软件中使用(”使用”指类库引用，修改后的代码或者衍生代码)GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。
-
-### CAN NOT DO
 - 不允许修改后和衍生的代码做为闭源的商业软件发布和销售
 
 ### Scenario
@@ -121,9 +126,9 @@ GPL v3的修订草案中，不仅要求用户公布修改的源代码，还要�
 
 ---
 
-## 四. LGPL
+## 四. [LGPL](http://www.opensource.org/licenses/lgpl-license)
 
-### Brief Introduction 
+### Brief Introduction
 GNU Lesser General Public License
 
 LGPL 是GPL的一个为主要为类库使用设计的开源协议。
@@ -131,7 +136,7 @@ LGPL 是GPL的一个为主要为类库使用设计的开源协议。
 ### Aim at
 LGPL 允许商业软件通过类库引用（link）方式使用LGPL类库而不需要开源商业软件的代码。
 
-### CAN DO 
+### CAN DO
 
 - 自由的使用
 - 修改源代码，
@@ -145,15 +150,15 @@ LGPL协议的开源 代码很适合作为第三方类库被商业软件引用，
 
 ---
 
-## 五. MIT
+## 五. [MIT](http://www.opensource.org/licenses/MIT)
 
-### Brief Introduction 
+### Brief Introduction
 MIT协议又称麻省理工学院许可证，最初由麻省理工学院开发. MIT是和BSD一样宽范的许可协议，作者只想保留版权。
 
 ### Aim at
 作者只想保留版权，而无任何其它的限制。
 
-### CAN DO 
+### CAN DO
 
 - 被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软件及软件的副本。
 - 被授权人可根据程式的需要修改授权条款为适当的内容。
@@ -164,13 +169,20 @@ MIT协议又称麻省理工学院许可证，最初由麻省理工学院开发. 
 ---
 
 ## 总结
+> - BSD2：修改版本必须保持其原始版权声明。
+- BSD3：修改版本必须保持其原始版权声明。未经许可不得使用原作者或公司的名字做宣传。
+- Apache：修改版本必须保持其原始版权声明；修改过的文件要标明改动。
+- GPL：只要你用了任何该协议的库、甚至是一段代码，那么你的整个程序，不管以何种方式链接，都必须全部使用GPL协议、并遵循该协议开源。商业软件公司一般禁用GPL代码，但可以使用GPL的可执行文件和应用程序。
+- LGPL：就是GPL针对动态链接库放松要求了的版本，即允许非LGPL的代码动态链接到LGPL的模块。注意：不可以静态链接，否则你的代码也必须用LGPL协议开源。
+- MIT：修改版本必须保持其原始版权声明。
+
+
 版权有利有弊,总体上讲还是利大于弊.
 
-- 弊: 阻碍技术的传播
+- 弊: 阻碍技术的传播，或增加技术传播的成本。
 - 利: 尊重原创者, 提升行业竞争力.
 
-维护版权, 猿猿有责!!
-希望这篇文章能够在您以后的撸代码过程中有所帮助.
+在工作当中我们常常会采用／引用一些开源框架或第三方类库，大大的缩短我们的开发周期，甚至提升软件的性能。本章内容阅读完毕后，希望大家在需要引用的场景下做出最正确的选择。
 
 
 ---
