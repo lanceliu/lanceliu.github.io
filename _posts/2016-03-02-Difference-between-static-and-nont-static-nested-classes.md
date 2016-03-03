@@ -3,7 +3,7 @@ layout: post
 title:   Java静态嵌套类和非静态嵌套类的区别
 date:   2016-03-02 09:04:52
 categories: Java
-published: false
+published: true
 comments: true
 thread: 201603020202425555
 ---
@@ -91,7 +91,7 @@ public class OuterClass {
     - 永远不能为abstract
     - 隐含是final的
     - 是一个local inner class并且不是静态的。
-    
+
 获取方式：
  - new *ParentClassName*(*constructorArgs*) {*members*}
  - new *InterfaceName*() {*members*}
