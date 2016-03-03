@@ -14,10 +14,11 @@ thread: 201603020202425555
 
 
 
-1. Static nested classes 获取方式：
-OuterClass.StaticNestedClass, 例如：
+## Static nested classes
+获取方式：
  - OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
 OuterClass的一个实例中可以有多个Static nested classes存在。
+
 ```Java
 public class OuterClass {
     private static int a = 1;
@@ -41,9 +42,12 @@ public class OuterClass {
     }
 }
 ```
-2. Non-Static nested classes（inner classes） 获取方式：
+
+## Non-Static nested classes（inner classes）
+获取方式：
  - OuterClass.InnerClass innerClass = outerObject.new InnerClass();
 OuterClass一个实例只能存在一个innerClass的实例。也叫做enclosing instance
+
 ```Java
 public class OuterClass {
     private int a=1;
@@ -64,11 +68,13 @@ public class OuterClass {
     }
 }
 ```
-3. local inner classes
+
+## local inner classes
 这种是定义在方法内部的, 所以也被叫做Method local inner class。
 类似于局部变量，不能定义为public，protected，private或者static类型。
 定义方法中，只能方法中声明为final类型的变量。
-```java
+
+```Java
 public class OuterClass {
     public static void main(String[] args) {
         new OuterClass().method();
@@ -87,7 +93,8 @@ public class OuterClass {
     }
 }
 ```
-4. [anonymous inner classes](http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5)
+
+## [anonymous inner classes](http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5)
     - 永远不能为abstract
     - 隐含是final的
     - 是一个local inner class并且不是静态的。
@@ -95,6 +102,7 @@ public class OuterClass {
 获取方式：
  - new *ParentClassName*(*constructorArgs*) {*members*}
  - new *InterfaceName*() {*members*}
+
 ```Java
 public class OuterClass {
 
@@ -109,7 +117,6 @@ public class OuterClass {
                 return "ParentClassName anonymous ";
             }
         });
-
         new Runnable() {
             @Override
             public void run() {
