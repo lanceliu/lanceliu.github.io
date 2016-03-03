@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring源码解析－读书笔记一－概述"
+title:  "Spring源码解析－ 概述"
 date:   2016-01-24 20:49:52
 categories: spring
 comments: true

@@ -95,6 +95,7 @@ public class OuterClass {
 ```
 
 ## [anonymous inner classes](http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5)
+
     - 永远不能为abstract
     - 隐含是final的
     - 是一个local inner class并且不是静态的。
