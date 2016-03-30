@@ -15,7 +15,8 @@ thread: 20160329220652555
 
 很多Web应用程序的安全问题都是由于轻信了第三方提供的数据。比如用户输入的数据，验证之前都属于不安全的数据，输出到客户端可能造成XSS跨站脚本攻击；不安全数据作用到数据库，可能产生SQL注入问题；更为危险的一种就是CSRF。那我们作为应用开发者应该怎么办呢？
 
-# XSS(Cross Site Script 跨站脚本攻击 )
+# XSS(Cross Site Script 跨站脚本攻击)
+
 ### XSS成因
 XSS其实就是Html的注入问题，攻击者的输入没有经过严格的控制进入了数据库，最终显示给来访的用户，导致可以在来访用户的浏览器里以浏览用户的身份执行Html代码，数据流程如下：攻击者的Html输入—>web程序—>进入数据库—>web程序—>用户浏览器。
 
@@ -37,12 +38,10 @@ while (true) { alert("你关不掉我~");}
 
 ### 解决方法
 - 过滤特殊字符
-
   对特殊字符过滤或者escape、
 
 - 使用HTTP头指定类型
-
-set("Content-Type", "text/javascript"), 知道浏览器解析javascript
+  set("Content-Type", "text/javascript"), 知道浏览器解析javascript
 
 # SQL注入（SQL Injection）
 简称SQL注入攻击，是一种常见的安全漏洞，用来从数据库获取敏感信息，或者避开数据库限制条件的判断。
@@ -76,6 +75,7 @@ String sql = "select * from Order where name = '" + shipCity + "'";
 4. 所有的查询语句建议使用数据库提供的参数化查询接口，参数化的语句使用参数而不是将用户输入变量嵌入到SQL语句中，即不要直接拼接SQL语句。
 
 # CSRF(Cross Site Request Forgery 跨站请求伪造)
+
 ### 成因
 伪造请求，冒充用户在站内的正常操作。
 ![Web CSRF](/assets/img/security/web_csrf.jpg)
@@ -84,11 +84,12 @@ String sql = "select * from Order where name = '" + shipCity + "'";
 绝大多数网站是通过 cookie 等方式辨识用户身份（包括使用服务器端 Session 的网站，因为 Session ID 也是大多保存在 cookie 里面的），再予以授权的。所以要伪造用户的正常操作，最好的方法是通过 XSS 或链接欺骗等途径，让用户在本机（即拥有身份 cookie 的浏览器端）发起用户所不知道的请求。
 
 ### 攻击示例
+
 - 银行网站A，它以GET请求来完成银行转账的操作，如http://www.mybank.com/Transfer.php?toBankId=11&money=1000
 - 危险网站B，它里面有一段HTML的代码如下<img src=http://www.mybank.com/Transfer.php?toBankId=11&money=1000>
 - 首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块......
 
-为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的<img>以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&money=1000”， 结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作......\
+> 为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的<img>以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&money=1000”， 结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作......\
 
 ### 解决方式
 一般都是在服务器端做处理：
@@ -97,7 +98,7 @@ String sql = "select * from Order where name = '" + shipCity + "'";
 - Cookie信息加密
 
 
-参考
-http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html 浅谈CSRF攻击方式
-http://selfcontroller.iteye.com/blog/1844653  xss与csrf的区别
-http://blog.csdn.net/hengshujiyi/article/details/45972533 AES,SHA1,DES,RSA,MD5区别
+## 参考:
+- [浅谈CSRF攻击方式](http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
+- [XSS与CSRF的区别](http://selfcontroller.iteye.com/blog/1844653)
+- [AES,SHA1,DES,RSA,MD5区别](http://blog.csdn.net/hengshujiyi/article/details/45972533)
