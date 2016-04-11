@@ -15,6 +15,13 @@ Spring Framework 是一个开源的Java/Java EE全功能栈（full-stack）的�
 该框架基于Expert One-on-One Java EE Design and Development(ISBN 0-7645-4385-7)一书中的代码，最初由Rod Johnson和Juergen Hoeller等开发。
 提供了一个简易的开发方式，这种开发方式，将避免那些可能致使底层代码变得繁杂混乱的大量的属性文件和帮助类。
 
+The Spring Framework在2004年第一次发布；从那时起有大的版本发布：
+Spring2.0提供XMl namespaces 和 AspectJ支持；
+Spring2.5引入了annotation－driven配置；
+Spring3.0在整个基础代码中引入了Java5.0，还有例如Java－Based @Configuration模型；
+Spring4.0是最新的大版本并且第一次全面支持Java8。向前兼容到Java7，Java6.
+
+
 ## 二、Spring特性
 Spring框架可以划分为核心、组件和应用三个方面。
 
