@@ -40,7 +40,7 @@ Spring IoC容器已经不是原来简单的[Interface21](http://www.infoq.com/cn
 # 二、设计与实现：BeanFactory 和 ApplicationContext
 IoC容器主要系列：
 一个是实现BeanFactory接口的简单容器系列，这系列之实现了容器的最基本功能；
-另一个是ApplicationContext应用上下文，作为容器的搞基形态二存在。
+另一个是ApplicationContext应用上下文，作为容器的高级形态而存在。
 
 
 BeanDefinition来管理对象以及之间的相互依赖关系：
@@ -277,6 +277,7 @@ XmlBeanDefinitionReader:
         try {
             int validationMode = getValidationModeForResource(resource);
             //根据xml文件，得到标准的Document对象
+            //EntityResolver 主要用做验证用，可参考http://www.cnblogs.com/mjorcen/p/3642855.html
             Document doc = this.documentLoader.loadDocument(
                     inputSource, getEntityResolver(), this.errorHandler, validationMode, isNamespaceAware());
             return registerBeanDefinitions(doc, resource);
