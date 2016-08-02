@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Jenkins－Maven，Webpack构建踩过的坑"
-date:   2016-07-27 09:47:52
+date:   2016-08-02 17:35:52
 categories: jenkins maven webpack
-published: false
+published: true
 comments: true
 thread: 20160802171852555
 ---
