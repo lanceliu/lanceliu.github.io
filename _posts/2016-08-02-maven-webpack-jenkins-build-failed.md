@@ -22,8 +22,10 @@ thread: 20160802171852555
 
 ## 错误二
 1. webpack构建是由于一个前端迷糊同学引入了一个node依赖“vue-echarts”, 这个依赖的配置项中的入口  "main":"dist/vue-echarts.js", 明显不符合常理，一般该处会引用“src”文件夹下的入口文件
-2. 本地修复后，前端同学们已经提交issue给百度的同学们了。
-3. 重新安装此依赖包，webpack构建花费一分钟不到就完成了。
+2. node-sass 有一个包死活install失败，具体情况见github上一个issue：https://github.com/sass/node-sass/pull/1117
+［libsass seems to compile just fine with the default gcc 4.6.3］，构建机器gcc才是4.4.x的，yum update后。重新安装成功。
+3. 本地修复后，前端同学们已经提交issue给百度的同学们了。
+4. 重新安装此依赖包，webpack构建花费一分钟不到就完成了。
 
 
 以上就是填坑过程。
