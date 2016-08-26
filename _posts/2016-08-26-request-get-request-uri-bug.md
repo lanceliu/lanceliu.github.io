@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "request.getRequestURI return url with hash symbol"
-date:   2016-08-10 09:17:52
+date:   2016-08-26 13:13:52
 categories: servlet http
 published: true
 comments: true
