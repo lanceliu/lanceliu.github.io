@@ -7,8 +7,6 @@ published: true
 comments: true
 thread: 20160830095055555
 ---
-Spring MVC整合Swagger
----
 API文档相信大家都有维护的经历，但如何构建一个容易阅读，维护，测试的API文档呢，找过一些资料，发现Swagger比较符合上面这三点。
 [swagger](http://swagger.io/)包括库、UI、编辑器、代码生成器等很多部分.
   - UI, API列表显示和测试。
