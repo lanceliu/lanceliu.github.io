@@ -19,7 +19,7 @@ thread: 201603020202425555
  - OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
 OuterClass的一个实例中可以有多个Static nested classes存在。
 
-```Java
+```java
 public class OuterClass {
     private static int a = 1;
     private int b=2;
@@ -48,7 +48,7 @@ public class OuterClass {
  - OuterClass.InnerClass innerClass = outerObject.new InnerClass();
 OuterClass一个实例只能存在一个innerClass的实例。也叫做enclosing instance
 
-```Java
+```java
 public class OuterClass {
     private int a=1;
     private int b=2;
@@ -74,7 +74,7 @@ public class OuterClass {
 类似于局部变量，不能定义为public，protected，private或者static类型。
 定义方法中，只能方法中声明为final类型的变量。
 
-```Java
+```java
 public class OuterClass {
     public static void main(String[] args) {
         new OuterClass().method();
@@ -104,7 +104,7 @@ public class OuterClass {
  - new *ParentClassName*(*constructorArgs*) {*members*}
  - new *InterfaceName*() {*members*}
 
-```Java
+```java
 public class OuterClass {
 
     public void print( Date date ) {
