@@ -2,7 +2,7 @@
 layout: post
 title:  "nginx ssl config error"
 date:   2016-10-11 09:50:52
-categories: android toolbar shadow
+categories: https nginx
 published: true
 comments: true
 thread: 20161011095055555
