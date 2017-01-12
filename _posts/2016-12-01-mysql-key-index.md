@@ -2,7 +2,7 @@
 layout: post
 title:  "mysql中key 、primary key 、unique key 与index区别"
 date:   2016-12-01 09:50:52
-categories: database
+categories: database sql
 published: true
 comments: true
 thread: 20161201095055555
