@@ -30,6 +30,29 @@ redis 非常轻量级，一个空redis实例占用内存只有1mb左右。
 
 ### 命令
 
+#### 键名规范
+（1）？ 匹配一个字符
+（2）* 匹配任意个字符
+（3）[] 匹配中括号内的任一字符，可以用-来表示一个范围
+（4）\x 匹配字符x，用于转义符号
+
+字符串类型是最基本的数据类型，最大容量为512M
+
+#### 具体命令
+
+KEYS * 列出所有键
+
+EXISTS [key] 判断键是否存在
+
+DEL [key……] 删除一个或多个键。 Del命令不支持通配符
+
+type：获得键值的数据类型，格式是type key
+
+rename：改名，格式是rename oldKey newKey
+
+renamenx：如果不存在则改名，格式是rename oldKey newKey
+
+
 incrby key increment 增加指定的整数
 
 decr key increment 减少指定的整数
