@@ -75,3 +75,21 @@ bitop operation destkey key [key ...]
 redis的事务没有关系数据库事务提供的回滚功能。
 - 防范语法错误。保证键名规范。
  key = 表名:主键名:列名
+
+
+## 四、redis多实例启动相关命令
+
+ 启动多实例
+ redis-server &
+redis-server --port 6380 &
+redis-server --port 6381 &
+redis-server --port 6382 &
+
+
+查看启动的多实例：  ps -ef | grep redis
+
+使用实例： redis-cli -p 6380
+
+关闭实例：
+全部关闭：    redis-cli shutdown
+指定端口关闭： redis-cli -p 6380 shutdown
