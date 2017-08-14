@@ -116,3 +116,69 @@ NIO四种状态 以及可获得通知
 - OP_WRITE 可用于写数据
 
 选择器（Selector）运行在一个线程上（检查状态变化&对变化做出响应响应），在应用程序对状态的改变作出响应之后，选择器会被重置，并重复这一过程。
+
+# 5 ByteBuffer
+Java NIO的ByteBuffer作为字节容器，与Channel进行交互。
+Netty 使用ByteBuf替代ByteBuffer，一个强大的实现既解决了JDK API的局限性，又为网络应用开发者提供了更好的API。
+
+## 5.1 ByteBuf API
+Netty数据处理API通过两个组件暴露-ByteBuf和ByteBufHolder，优点：
+- 可以被用户自定义的缓冲区类型扩展
+- 通过内置的复合缓冲区类型实现了透明的零拷贝。
+- 容量可以按需增长（类似StringBuilder)
+- 在读和写这两种模式之间切换不需要调用ByteBuffer的flip（）方法
+- 读和写使用了不同的索引
+- 支持方法的链式调用
+- 支持引用计数
+- 支持池化
+
+## 5.2 ByteBuf - 数据容器
+维护了两个不同索引：一个readderIndex／writerIndex
+- 空ByteBuf， readerIndex=writerIndex=0；
+- readerIndex=writerIndex时，将会到达可以读取的数据的末尾
+- 名称以read／write开头的ByteBuf方法会推进对应的索引
+- 名称以set／get开头的操作则不会。
+
+使用方式
+- 堆缓冲区
+    - 将数据存储在JVM堆空间，也被称为 backing array
+    - 能在没有池化下提供快速的分配和释放
+- 直接缓冲区
+    - NIO在JDK1.4引入的ByteBuffer类允许JVM实现通过本地调用来分配内存
+    - 之上的内容驻留在挥别垃圾回收的堆之外
+    - 如果数据是在堆上分配的缓冲区，通过socket发送之前，JVM会在内部把缓冲区copy到直接缓冲区
+    - 相对于基于堆的缓冲区，他们的分配和释放都较为昂贵
+- 复合缓冲区
+
+# 6 ChannelHanlder & ChannelPipeline
+## 6.1.1 ChannelHandler
+Channel的生命周期状态，状态改变时会生成对应事件，将会被妆发给ChannelPipline中的ChannelHandler
+- ChannelUnregistered： 已被创建，但还未注册到EventLoop
+- ChannelRegistered：已经注册到EventLoop
+- ChannelActive：处于活动状态，已经连接到他的远程节点。可以接收和发送数据
+- ChannelInactive：没有连接到远程节点
+
+## 6.1.2 ChannelHandler的生命周期
+ChannelHandler被添加到ChannelPipeline／从ChannelPipeline移除时会调用这些操作。这些方法中都接受一个ChannelHandlerContext
+- handlerAdded
+- handlerRemoved
+- exceptCaught
+
+如果一个消息被消费者或者丢弃了，并且没有传递给CHannelPipline中的下一个ChannelOutboundHandler, 就应该调用ReferenceCountUtil.release()
+
+## 6.2 ChannelPipeline
+ChannelHandlerContext使ChannelHandler和他的ChannelPipeline以及其他的ChannelHandler交互
+- 通知其所属的ChannelPipeline中的下一个ChannelHandler
+- 还可以动态的修改所属的ChannelPipeline：所包含的ChannelHandler的编排
+
+# 7 EventLoop 和线程模型
+在netty4中，所有的I/O操作和事件都由已经被分配给了EventLoop的Thread来处理。
+
+# 8 Bootstrap
+Bootstrap 把Netty的核心组件以及组件拼装起来。
+
+Bootstrap / ServerBootstrap 都实现了 Cloneable接口？
+- 有时候需要创建多个具有类似配置／完全相通配置的Channel
+- 不想为每个Channel都创建一个新的引导类实例
+
+# 9 Unit Test
