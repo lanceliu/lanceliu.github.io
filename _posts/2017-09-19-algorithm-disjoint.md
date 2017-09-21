@@ -3,7 +3,7 @@ layout: post
 title:  "算法-不想交集"
 date:   2017-09-16 10:58:52
 categories: algorithm 算法
-published: false
+published: true
 comments: true
 thread: 20170916101155555
 ---
