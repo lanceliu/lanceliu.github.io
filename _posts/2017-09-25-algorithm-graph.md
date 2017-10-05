@@ -67,3 +67,9 @@ O(E+V)
   LCv=min(LCw-Cv,w)
 
 WordLadder
+
+### 2.3 网络流
+最大流算法，有一篇博文讲的比较清晰 [最大流](http://www.cnblogs.com/ShaneZhang/p/3755479.html)
+
+### 2.4 最小生成树
+针对无向图的,最小生成树存在当且仅当G是连通的。 [最小生成树](http://blog.csdn.net/u014774781/article/details/46475163)
