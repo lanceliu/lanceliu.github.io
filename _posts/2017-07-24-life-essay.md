@@ -3,7 +3,7 @@ layout: post
 title:  "生活随笔"
 date:   2017-07-24 10:58:52
 categories: 随笔
-published: false
+published: true
 comments: true
 thread: 20170724101155555
 ---
