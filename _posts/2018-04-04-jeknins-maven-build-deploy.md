@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Jenkins、Maven部署踩坑"
-date:   2018-01-27 10:58:52
+date:   2018-04-04 10:58:52
 categories: maven jenkins deploy
 published: true
 comments: true
