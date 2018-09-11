@@ -2,7 +2,7 @@
 layout: post
 title:  "Saying No"
 date:   2018-09-08 10:11:52
-categories: the clean coder
+categories: the-clean-coder
 published: true
 comments: true
 thread: 20180908101155555
@@ -27,6 +27,6 @@ thread: 20180908101155555
   - 功能简单，快速开工
   - 没能挖掘需求，借机添加需求
   - 临时加需求延后，保持RD紧绷状态
-  
+
   我们唯一能做到的就是大声说“不”
 5. 如何写出好代码

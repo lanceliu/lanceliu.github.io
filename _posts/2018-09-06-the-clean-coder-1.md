@@ -2,7 +2,7 @@
 layout: post
 title:  "Professionalism"
 date:   2018-09-06 10:11:52
-categories: the clean coder
+categories: the-clean-coder
 published: true
 comments: true
 thread: 20180906101155555

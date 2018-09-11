@@ -2,7 +2,7 @@
 layout: post
 title:  "编码"
 date:   2018-09-09 14:11:52
-categories: the clean coder
+categories: the-clean-coder
 published: true
 comments: true
 thread: 20180909141155555

@@ -2,7 +2,7 @@
 layout: post
 title:  "Saying Yes"
 date:   2018-09-09 10:11:52
-categories: the clean coder
+categories: the-clean-coder
 published: true
 comments: true
 thread: 20180909101155555
