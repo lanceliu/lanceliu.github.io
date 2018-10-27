@@ -21,9 +21,70 @@ thread: 20181026224555555
   - 支持多种窗口系统
     - 不同的视感标准通常是在不同的窗口系统上实现的。Lexi的设计应尽可能的独立于窗口系统。多种格式化结构。
   - 用户操作
-    - 用户通过不同的用户界面控制Lexi，包括按钮和下拉菜单。这些界面对应的功能分散在整个应用对象中。这里的难点在于提供一个统一的机制，既可以访问这些分散的功能，又可以对操作进行撤消(undo)。命令模式结构
+    - 用户通过不同的用户界面控制Lexi，包括按钮和下拉菜单。这些界面对应的功能分散在整个应用对象中。这里的难点在于提供一个统一的机制，既可以访问这些分散的功能，又可以对操作进行撤消(undo)。命令模式p结构
   - 拼写检查和连字符
     -Lexi是怎样支持像检查拼写错误和决定连字符的连字点这样的分析操作的?当我们不得不添加一个新的分析操作时，我们怎样尽量少修改相关的类? 处理流程应该是一致的，具体如何check行为应该是不同的，策略模式。
 
 # 文档结构
 设计一种结构能够表示不同的页面元素。类似于递归组合结构。一种元素可以容纳其他元素。
+抽象为 Glyph 类：属性；动作；是否容器；位置信息；
+
+# 格式化
+格式化算法应该独立于存储态文档结构，经过格式化得到特殊的物理结构。
+格式化算法：各个Glyph之间的关系，运行态结构;
+
+@startuml
+Composition   o--    Glyph : > children
+Composition   o--   Compositor
+Compositor   <|--   SimpileCompositor
+Compositor   <|--   ArrayCompositor
+Compositor   <|--   TxtCompositor
+
+interface Glyph {
+void Insert(Glyph, int i)
+}
+
+class Composition {
+void Insert(Glyph, g, int i)
+}
+
+interface Compositor {
+void compose()
+}
+
+interface Compositor {
+setComposition(Composition )
+}
+@enduml
+
+模式的主要参与者是Strategy对象(这些对象中封装了不同的算法)和它们的操作环境。其实Compositor就是Strategy。它们封装了不同的格式算法。Composition就是Compositor策略的环境。
+
+# 修饰用户界面
+
+@startuml
+MonoGlyph   o--    Glyph
+MonoGlyph   <|--   Border
+MonoGlyph   <|--   Scroller
+
+interface Glyph {
+void Draw(Window)
+}
+
+interface MonoGlyph {
+Glyph component
+void Draw(Window)
+}
+
+interface Border {
+void Draw(Window)
+void DrawBorder(Window)
+}
+
+interface Scroller {
+void Draw(Window)
+void DrawScroller(Window)
+}
+@enduml
+
+
+# 支持多种视感标准
