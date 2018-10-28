@@ -88,3 +88,59 @@ void DrawScroller(Window)
 
 
 # 支持多种视感标准
+支持多种视感障碍在于不同视感标准的差异性。目标是符合多个已存在的视觉标准，并且在新标准出现时很容易增加对新标准的支持。
+1. 对象的定义
+  一、抽象窗口组件
+  定义窗口组件的抽象集合，包含通用的操作
+  二、具体实现子类
+  抽象组件对应不同视感标准的具体实现子类
+2. 对象创建
+根据视感标准创建出一组窗口组件。工厂类和产品类。
+
+@startuml
+GUIFactory   <|--   MotiFactory
+GUIFactory   <|--   PMFactory
+GUIFactory   <|--   MacFactory
+
+
+interface GUIFactory {
+void CreateScrollBar()
+void CreateButton()
+void CreateMenu()
+}
+
+class MotiFactory {
+void CreateScrollBar()
+void CreateButton()
+void CreateMenu()
+}
+
+class PMFactory {
+void CreateScrollBar()
+void CreateButton()
+void CreateMenu()
+}
+
+class MacFactory {
+void CreateScrollBar()
+void CreateButton()
+void CreateMenu()
+}
+@enduml
+
+# 支持多种窗口系统
+视感只是众多移植问题之一。另一个移植问题就是所运行的窗口环境。
+乍一看和视感解决方式一样也可以应用抽象工厂的模式。
+
+Window封装了窗口要各个系统都要做的一些事情：
+- 提供画几何图形的操作
+- 能变成图标或还原成窗口
+- 改变自己的大小
+- 根据需要画出窗口内容
+
+Window类的窗口功能必须跨越不同的窗口系统。
+1. 功能交集。问题在于Window接口在能力上只类似于一个最小功能的窗口系统，对一些即使是大多数窗口系统都支持的高级特征，我们也无法利用。
+2. 功能并集。创建一个合并了所有存在系统的功能的接口。但是这样的接口势必规模巨大，并且存在不一致的地方。此外，当某个厂商修改它的窗口系统时，我们不得不修改这个接口和Lexi，因为Lexi依赖于它。
+
+
+应该对变化的概念抽象出来单独演化，并且该部分参与者是窗口系统本身，不是程序员。
