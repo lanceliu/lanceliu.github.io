@@ -32,7 +32,7 @@ thread: 20181026224555555
 # 格式化
 格式化算法应该独立于存储态文档结构，经过格式化得到特殊的物理结构。
 格式化算法：各个Glyph之间的关系，运行态结构;
-
+```plantuml
 @startuml
 Composition   o--    Glyph : > children
 Composition   o--   Compositor
@@ -56,11 +56,12 @@ interface Compositor {
 setComposition(Composition )
 }
 @enduml
+```
 
 模式的主要参与者是Strategy对象(这些对象中封装了不同的算法)和它们的操作环境。其实Compositor就是Strategy。它们封装了不同的格式算法。Composition就是Compositor策略的环境。
 
 # 修饰用户界面
-
+```plantuml
 @startuml
 MonoGlyph   o--    Glyph
 MonoGlyph   <|--   Border
@@ -85,7 +86,7 @@ void Draw(Window)
 void DrawScroller(Window)
 }
 @enduml
-
+```
 
 # 支持多种视感标准
 支持多种视感障碍在于不同视感标准的差异性。目标是符合多个已存在的视觉标准，并且在新标准出现时很容易增加对新标准的支持。
@@ -96,7 +97,7 @@ void DrawScroller(Window)
   抽象组件对应不同视感标准的具体实现子类
 2. 对象创建
 根据视感标准创建出一组窗口组件。工厂类和产品类。
-
+```plantuml
 @startuml
 GUIFactory   <|--   MotiFactory
 GUIFactory   <|--   PMFactory
@@ -127,6 +128,7 @@ void CreateButton()
 void CreateMenu()
 }
 @enduml
+```
 
 # 支持多种窗口系统
 视感只是众多移植问题之一。另一个移植问题就是所运行的窗口环境。
