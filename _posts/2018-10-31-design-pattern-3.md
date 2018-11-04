@@ -7,7 +7,7 @@ published: true
 comments: true
 thread: 20181031224555555
 ---
-第二章 创建型模式
+第三章 创建型模式
 ---
 创建型模式抽象了实例化过程。它们帮助一个系统独立于如何创建、组合和表示它的那 些对象。
 
@@ -174,9 +174,188 @@ Abstract Factory 实现的一些指导建议：
       - 一个更灵活但不太安全的设计是给创建对象的操作增加一个参数。该参数指定 了将被创建的对象的种类。它可以是一个类标识符、一个整数、一个字符串，或其他任何可 以标识这种产品的东西。实际上使用这种方法， A b s t r a c t F a c t o r y 只需要一个“ M a k e ”操作和 一个指示要创建对象的种类的参数。这是前面已经讨论过的基于原型的和基于类的抽象工厂 的技术。
 
 10. 示例代码
-略
+```java
+class MazeFactory {
+  Maze makeMaze();
+  Maze makeRoom();
+  Maze makeWall();
+  Maze makeDoor();
+}
+
+class  MazeGame {
+  Maze createMaze(MazeFactory factory) {
+    Maze maze = factory.makeMaze();
+    Room r1 = factory.makeRoom(1);
+    Room r2 = factory.makeRoom(2);
+    Door door = factory.makeDoor(r1, r2);
+
+    maze.addRoom(r1);
+    maze.addRoom(r2);
+
+    r1.setSide(North, factory.makeWall());
+    r1.setSide(East, door);
+    r1.setSide(South, factory.makeWall());
+    r1.setSide(West, factory.makeWall());
+
+    r2.setSide(North, factory.makeWall());
+    r2.setSide(West, door);
+    r2.setSide(South, factory.makeWall());
+    r2.setSide(East, factory.makeWall());
+  }
+}
+```
+
 11. 已知应用
 使用AbstractFactory模式以达到在不同窗口系统(例如，XWindows和SunView)间的可移植性。
+
 12. 相关模式
 AbstractFactory类通常用工厂方法(FactoryMethod(3.3))实现，但它们也可以用Prototype实现。
 一个具体的工厂通常是一个单件(Singleton(3.5))。
+
+## 二、BUILDER(生成器)— 对象创建型模式
+1. 意图
+将一个`复杂对象`的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
+
+2. 动机
+一个RTF(RichTextFormat)文档交换格式的阅读器应能将RTF转换为多种正文格式。该阅读器可以将RTF文档转换成普通ASCII文本或转换成一个能以交互方式编辑的正文窗口组件。但问题在于可能转换的数目是无限的。因此要能够很容易实现新的转换的增加，同时却不改变RTF阅读器（结构）。
+    - 当RTFReader对RTF文档进行语法分析时，它使用TextConverter去做转换
+    - 每种转换器类将创建和装配一个复杂对象的机制隐含在抽象接口的后面。转换器独立于阅读器，阅读器负责对一个RTF文档进行语法分析。
+    - Builder模式将分析文本格式的算法(即RTF文档的语法分析程序)与描述怎样创建和表示一个转换后格式的算法分离开来
+
+```plantuml
+RTFReader "builder" o-- TextConverter
+TextConverter <|-- ASCIIConverter
+TextConverter <|-- TexConverter
+TextConverter <|-- TextWidgetConverter
+
+class RTFReader {
+  void parseRTF();
+}
+
+note bottom of RTFReader
+while ( t= get the next token) {
+  switch t.Type {
+    char:
+    builder.convertCharacter(t.char);
+    font:
+    builder.convertFontChange(t.font);
+    para:
+    builder.convertParagraph();
+  }
+}
+end note
+
+abstract class TextConverter {
+  + char convertCharacter();
+  + Font convertFontChange();
+  + Para convertParagraph();
+}
+
+class ASCIIConverter {
+  + char convertCharacter();
+  + ASCIIText getASCIIText();
+}
+
+class TexConverter {
+  + char convertCharacter();
+  + Font convertFontChange();
+  + Para convertParagraph();
+  + TeXText getTexText();
+}
+
+class TextWidgetConverter {
+  + char convertCharacter();
+  + Font convertFontChange();
+  + Para convertParagraph();
+  + TextWidget getTextWidget();
+}
+
+```
+
+3. 适用性
+以下情况使用
+    - 当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式时。获取一个内部结构复杂的对象而不关心是如何组成和关系配置的。
+    - 当构造过程必须允许被构造的对象有不同的表示时。构造的产品可以不一样。
+
+4. 结构
+同`2. 意图`
+
+5. 参与者
+Builder(TextConverter)
+    - 为创建一个Product对象的各个部件指定抽象接口。
+ConcreteBuilder(ASCIIConverter、TeXConverter、TextWidgetConverter)
+    - 实现Builder的接口以构造和装配该产品的各个部件。
+    - 定义并明确它所创建的表示。
+    - 提供一个检索产品的接口(例如，GetASCIIText和GetTextWidget)。
+Director(RTFReader)
+    - 构造一个使用Builder接口的对象。
+Product(ASCIIText、TeXText、TextWidget)
+    - 表示被构造的复杂对象。ConcreteBuilder创建该产品的内部表示并定义它的装配过程。—包含定义组成部件的类，包括将这些部件装配成最终产品的接口。
+
+6. 协作
+• 客户创建 D i r e c t o r对象，并用它所想要的 B u i l d e r 对象进行配置。
+• 一旦产品部件被生成，导向器就会通知生成器。
+• 生成器处理导向器的请求，并将部件添加到该产品中。
+• 客户从生成器中检索产品。
+```plantuml
+Client -> Director: 创建
+Client -> ConcreteBuilder: 设定具体Builder
+Client -> Director: construct
+activate Director
+
+Director -> ConcreteBuilder: buildPartA()
+Director -> ConcreteBuilder: buildPartB()
+Director -> ConcreteBuilder: buildPartB()
+
+deactivate Director
+
+Client -> ConcreteBuilder: getResulte()
+```
+
+7. 效果
+  - 它使你可以改变一个产品的内部表示。
+  生成器可以隐藏这个产品的表示和内部结构。你在改变该产品的内部表示时所要做的只是定 义一个新的生成器。
+  - 它将构造代码和表示代码分开
+  每个ConcreteBuilder包含了创建和装配一个特定产品的所有代码，这些代码只需要写一次;然后不同的Director可以复用它以在相同部件集合的基础上构作不同的Product。
+  - 它使你可对构造过程进行更精细的控制
+
+8. 实现
+通常有一个抽象的Builder类为导向者可能要求创建的每一个构件定义一个操作。这些操作缺省情况下什么都不做。一个ConcreteBuilder类对它有兴趣创建的构件重定义这些操作
+
+9. 示例
+```java
+interface MazeBuilder{
+  void buildMaze();
+  void buildRoom();
+  void buildDoor();
+
+  Maze getMaze();
+}
+
+Class MazeGame {
+  Maze createMaze(MazeBuilder builder) {
+    builder.buildMaze();
+    builder.buildRoom(1);
+    builder.buildRoom(2);
+    builder.buildDoor(1, 2);
+
+    return bulder.getMaze();
+  }
+}
+```
+
+10. 已知应用
+  - 编译子系统中的Parser类是一个Director，它以一个ProgramNodeBuilder对象作为参数。
+  每当Parser对象识别出一个语法结构时，它就通知它的ProgramNodeBuilder对象。当这个语法分析器做完时，它向该生成器请求它生成的语法分析树并将语法分析树返回给客户。
+  - ClassBuilder是一个生成器，Class使用它为自己创建子类。在这个例子中，一个Class既是Director也是Product。
+  - ByteCodeStream是一个生成器，它将一个被编译了的方法创建为字节数组。
+  ByteCodeStream不是Builder模式的标准使用，因为它生成的复杂对象被编码为一个字节数组，而不是正常的Smalltalk对象。但ByteCodeStream的接口是一个典型的生成器，而且将很容易用一个将程序表示为复合对象的不同的类来替换ByteCodeStream。
+
+11. 相关模式
+AbstractFactory(3.1)与Builder相似，因为它也可以创建复杂对象。主要的区别   
+    - Builder模式着重于一步步构造一个复杂对象。
+    - AbstractFactory着重于多个系列的产品对象(简单的或是复杂的)。
+    - Builder在最后的一步返回产品
+    - AbstractFactory来说，产品是立即返回的。
+
+Composite(4.3)通常是用Builder生成的。 `TODO: 为什么呢？`
