@@ -359,3 +359,79 @@ AbstractFactory(3.1)与Builder相似，因为它也可以创建复杂对象。�
     - AbstractFactory来说，产品是立即返回的。
 
 Composite(4.3)通常是用Builder生成的。 `TODO: 为什么呢？`
+
+## 三、FACTORY METHOD(工厂方法)— 对象创建型模式
+1. 意图
+  让子类决定实例化哪一个类。 Factory Method使一个类的 实例化延迟到其子类。
+2. 别名
+3. 动机
+  ```plantuml
+  interface Application{
+    +Document createDocument();
+    +Document newDocument();
+    +void openDocument();
+  }
+
+  interface Document {
+  +void open();
+  +void close();
+  +void save();
+  +void revert();
+  }
+
+  class MyDocument implements Document {
+
+  }
+
+  class MyApplication  implements Application {
+
+  }
+
+  ```
+4. 适用性
+  • 工厂类不知道它所必须创建的对象的类。
+  • 当工厂类希望由它的子类来指定它所创建的对象。
+  • 当类将创建对象的职责委托给多个子类中的某一个，并且你希望将哪一个帮助子类是代理者这一信息局部化的时候。
+5. 结构
+  略
+6. 参与者
+    Product(Document)
+    - 定义工厂方法所创建的对象的接口。
+    ConcreteProduct(MyDocument)
+    - 实现Product接口。
+    Creator(Application)
+    - 声明工厂方法，该方法返回一个Product类型的对象。Creator也可以定义一个工厂方法的缺省实现，它返回一个缺省的ConcreteProduct对象。
+    - 可以调用工厂方法以创建一个Product对象。
+    ConcreteCreator(MyApplication)
+    - 重定义工厂方法以返回一个ConcreteProduct实例。
+7. 协作
+  略
+8. 效果
+  略
+9. 实现
+  略
+10. 代码示例
+  ```java
+  class MazeGame {
+    + Maze createMaze() {
+      Maze maze = makeMaze();
+      Room r1 = makeRoom(1);
+      Room r2 = makeRoom(2);
+      Door door = makeDoor(r1, r2);
+
+      maze.addRoom(r1);
+      maze.addRoom(r2);
+      .....
+    }
+    + static Maze makeMaze();
+    + static Room makeRoom(int n);
+    + static Wall makeWall();
+    + static Door makeDoor(Room r1, Room r2);
+  }
+  ```
+11. 已知应用
+  略
+12. 相关模式
+AbstractFactory(3.1)经常用工厂方法来实现。AbstractFactory模式中动机一节的例子也对FactoryMethod进行了说明。
+工厂方法通常在TemplateMethods(5.10)中被调用。在上面的文档例子中，NewDocument就是一个模板方法。
+Prototypes(3.4)不需要创建Creator的子类。但是，它们通常要求一个针对Product类的Initialize操作。Creator使用Initialize来初始化对象。而FactoryMethod不需要这样的操作。
