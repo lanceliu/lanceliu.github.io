@@ -437,8 +437,8 @@ AbstractFactory(3.1)经常用工厂方法来实现。AbstractFactory模式中动
 Prototypes(3.4)不需要创建Creator的子类。但是，它们通常要求一个针对Product类的Initialize操作。Creator使用Initialize来初始化对象。而FactoryMethod不需要这样的操作。
 
 ## 四、总结
-Abstract Factory : 产品系列
-Factory Method ： 产品
-Builder： 创建过程精细化控制
+Abstract Factory : 产品系列，增加新产品困难
+Factory Method ： 产品，容易类爆炸
+Builder： 创建过程精细化控制，
 Prototype： 提升创建效率
 Singleton：保证内存只有一个对象
