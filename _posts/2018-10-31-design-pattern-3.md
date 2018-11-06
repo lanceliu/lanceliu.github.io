@@ -435,3 +435,10 @@ Composite(4.3)通常是用Builder生成的。 `TODO: 为什么呢？`
 AbstractFactory(3.1)经常用工厂方法来实现。AbstractFactory模式中动机一节的例子也对FactoryMethod进行了说明。
 工厂方法通常在TemplateMethods(5.10)中被调用。在上面的文档例子中，NewDocument就是一个模板方法。
 Prototypes(3.4)不需要创建Creator的子类。但是，它们通常要求一个针对Product类的Initialize操作。Creator使用Initialize来初始化对象。而FactoryMethod不需要这样的操作。
+
+## 四、总结
+Abstract Factory : 产品系列
+Factory Method ： 产品
+Builder： 创建过程精细化控制
+Prototype： 提升创建效率
+Singleton：保证内存只有一个对象

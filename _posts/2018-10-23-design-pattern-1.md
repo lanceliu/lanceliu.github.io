@@ -59,7 +59,7 @@ thread: 20181023224555555
 
 具体分类见列表
 
-  | 创建型  | 结构型  | 行为型
+- | 创建型  | 结构型  | 行为型
 --|---|---|--
 类  | Factory Method  |  Adapter |  Interpreter、Template Method
 对象| AbstractFactory、Builder、Prototype、Singleton  | Adapter(对象)、Bridge、Composite、Decorator、Facade、Flyweight、Proxy  |  ChainofResponsibility、Command、Iterator、Mediator、Memento、Observer、State、Strategy、Visitor
