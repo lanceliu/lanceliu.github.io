@@ -130,3 +130,30 @@ Controller：Command 请求路由给Model
 
 2. 动机
 如果一种特定类型的问题发生的频率足够高, 那么可能就值得将该问题的各个实例表述为一个简单语言中的句子。这样就可以构建一个解释器, 该解释器通过解释这些句子来解决该问题。
+
+3. 适用性
+当有一个语言需要解释执行 , 并且你可将该语言中的句子表示为一个抽象语法树时，可使用解释器模式。
+
+解释器是一个简单语法分析工具，它最显著的优点就是扩展性，修改语法规则只要修改相应的非终结符表达式就可以了，若扩展语法，则只要增加非终结符类就可以了。
+
+4. 结构
+```plantuml
+Context <-right- Client
+AbstractExpression <-right- Client
+AbstractExpression o-- TerminalExpression
+AbstractExpression o-- NonterminalExpression
+
+interface AbstractExpression {
+  +interpret()
+}
+```
+
+5. 参与者
+❑AbstractExpression——抽象解释器
+具体的解释任务由各个实现类完成，具体的解释器分别由TerminalExpression和NonterminalExpression完成。
+❑TerminalExpression——终结符表达式
+实现与文法中的元素相关联的解释操作，通常一个解释器模式中只有一个终结符表达式，但有多个实例，对应不同的终结符。具体到我们例子就是VarExpression类，表达式中的每个终结符都在栈中产生了一个VarExpression对象。
+❑NonterminalExpression——非终结符表达式
+文法中的每条规则对应于一个非终结表达式，具体到我们的例子就是加减法规则分别对应到AddExpression和SubExpression两个类。非终结符表达式根据逻辑的复杂程度而增加，原则上每个文法规则都对应一个非终结符表达式。
+❑Context——环境角色
+— 包含解释器之外的一些全局信息。具体到我们的例子中是采用HashMap代替
