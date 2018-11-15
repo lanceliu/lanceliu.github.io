@@ -157,3 +157,29 @@ interface AbstractExpression {
 文法中的每条规则对应于一个非终结表达式，具体到我们的例子就是加减法规则分别对应到AddExpression和SubExpression两个类。非终结符表达式根据逻辑的复杂程度而增加，原则上每个文法规则都对应一个非终结符表达式。
 ❑Context——环境角色
 — 包含解释器之外的一些全局信息。具体到我们的例子中是采用HashMap代替
+
+## 四、ITERATOR(迭代器)— 对象行为型模式
+1. 意图
+提供一种方法顺序访问一个聚合对象中各个元素 , 而又不需暴露该对象的内部表示
+
+2. 动机
+一个聚合对象, 如列表(list), 应该提供一种方法来让别人可以访问它的元素，而又不需暴露它的内部结构
+
+3. 结构
+```plantuml
+Aggregate <-left- Client
+Aggregate o-- ConcreteAggregate
+
+Iterator <-right- Client
+Iterator o-- ConcreteIterator
+
+interface Aggregate {
+  +createIterator();
+}
+interface Iterator {
+  +first()
+  +next()
+  +isDone()
+  +currentItem()
+}
+```
