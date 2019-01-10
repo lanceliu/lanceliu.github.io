@@ -2,7 +2,7 @@
 layout: post
 title:  "新个税计算"
 date:   2019-01-10 22:45:52
-categories: 隔离级别 锁
+categories: 生活 工具
 published: true
 comments: true
 thread: 20181213224555555
